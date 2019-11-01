@@ -34,7 +34,7 @@
 </head>
 <body>
     <p>Some Apple iOS devices crash when viewing small MP4 files (below about 250px wide), either in an <code>img</code> or <code>video</code> tag, or when visiting them directly.</p>
-    <p>If you are using an newer iPhone (XS, XR, XS Max, etc) or iPad (2018, 2019+), pressing the <strong>Render Bad MP4</strong> button will crash your browser.</p>
+    <p>If you are using a newer iPhone (XS, XR, XS Max, 11, 11 Pro, etc) or iPad (2018, 2019+), loading the MP4 version of the small animation below will crash your browser (when this happens, close that tab to get out).</p>
     <p class="devinfo hidden">
         Device Information (powered by <a href="https://web.wurfl.io/#wurfl-js" target="_blank">WURFL.js</a>):<br>
         <strong>Device</strong>: <span class="device"></span><br>
@@ -58,12 +58,12 @@
     </p>
 
     <p>This is the same animation as an MP4 in an <code>&lt;img&gt;</code> tag:<br>
-        <div class="example-img bad img-tag clickable"><p>Click to load the MP4 in an <code>&lt;img&gt;</code> tag.<br>This will freeze newer iPhones &amp; iPods<br>and is unsupported on all other devices.</p></div><br>
+        <div class="example-img bad img-tag clickable"><p>Click to load the MP4 in an <code>&lt;img&gt;</code> tag.<br>This <em>will</em> freeze newer iPhones &amp; iPods<br>and is unsupported on all other devices.</p></div><br>
     </p>
 
     <p>This is the same animation as an MP4 in a <code>&lt;video&gt;</code> tag:<br>
-        <div class="example-img bad video-tag clickable"><p>Click to load the MP4 in a <code>&lt;video&gt;</code> tag.<br>This will freeze newer iPhones &amp; iPods</p></div><br>
-        You can also <a href="assets/232x40.mp4" target="_blank">load this MP4 in another tab</a> to see it crash there.
+        <div class="example-img bad video-tag clickable"><p>Click to load the MP4 in a <code>&lt;video&gt;</code> tag.<br>This <em>might</em> freeze newer iPhones &amp; iPods</p></div><br>
+        You can also <a href="assets/232x40.mp4" target="_blank">load this MP4 in another tab</a>, it <em>might</em> crash there, or it might just fail to load.
     </p>
 
     <script>
@@ -79,12 +79,10 @@
     });
 
     document.addEventListener('WurflJSDetectionComplete', () => {
-        if (WURFL.complete_device_name !== undefined) {
-            document.querySelector('.device').innerHTML = WURFL.complete_device_name;
-            document.querySelector('.browser').innerHTML = `${WURFL.advertised_browser} ${WURFL.advertised_browser_version}`;
-            document.querySelector('.os').innerHTML = `${WURFL.advertised_device_os} ${WURFL.advertised_device_os_version}`;
-            document.querySelector('.devinfo').classList.remove('hidden');
-        }
+        document.querySelector('.device').innerHTML = WURFL.complete_device_name;
+        document.querySelector('.browser').innerHTML = `${WURFL.advertised_browser} ${WURFL.advertised_browser_version}`;
+        document.querySelector('.os').innerHTML = `${WURFL.advertised_device_os} ${WURFL.advertised_device_os_version}`;
+        document.querySelector('.devinfo').classList.remove('hidden');
     });
     </script>
     <script async src="https://wjs.wurflcloud.com/wurfl.js"></script>
