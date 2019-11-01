@@ -51,7 +51,14 @@
         <div class="example-img"><img src="assets/256x64.mp4"></div><br>
         <em>Note: this will only work on Apple Devices</em>
     </p>
+
+    <p>This is the same animation as an MP4 in a <code>&lt;video&gt;</code> tag:<br>
+        <div class="example-img"><video class="good" loop><source src="assets/232x40.mp4" type="video/mp4"></video></div><br>
+        <span class="controls"><button onclick="document.querySelector('video.good').play();">play</button> | <button onclick="document.querySelector('video.good').pause();">pause</button></span>
+    </p>
+
     <hr>
+    <strong>The above files work as expected, but when the file dimensions are slightly smaller, the browser freezes</strong>
 
     <p>This animated GIF is cropped slightly smaller, at <code>232x40</code>:<br>
         <div class="example-img"><img src="assets/232x40.gif"></div>
@@ -63,6 +70,7 @@
 
     <p>This is the same animation as an MP4 in a <code>&lt;video&gt;</code> tag:<br>
         <div class="example-img bad video-tag clickable"><p>Click to load the MP4 in a <code>&lt;video&gt;</code> tag.<br>This <em>might</em> freeze newer iPhones &amp; iPods</p></div><br>
+        <span class="controls bad hidden"><button onclick="document.querySelector('video.bad').play();">play</button> | <button onclick="document.querySelector('video.bad').pause();">pause</button></span><br>
         You can also <a href="assets/232x40.mp4" target="_blank">load this MP4 in another tab</a>, it <em>might</em> crash there, or it might just fail to load.
     </p>
 
@@ -74,7 +82,8 @@
             badImgDiv.innerHTML = '<img src="assets/232x40.mp4">';
         });
         badVidDiv.addEventListener('click', e => {
-            badVidDiv.innerHTML = '<video autoplay loop><source src="assets/232x40.mp4" type="video/mp4"></video>';
+            badVidDiv.innerHTML = '<video loop class="bad"><source src="assets/232x40.mp4" type="video/mp4"></video>';
+            document.querySelectorAll('.controls.bad.hidden').forEach(el => el.classList.remove('hidden'));
         });
     });
 
@@ -83,7 +92,7 @@
         if (WURFL.complete_device_name.match('iPad') && WURFL.advertised_device_os != 'iOS') {
             osVersion += " (you're in desktop mode, real OS version is unknown)";
         }
-        
+
         document.querySelector('.device').innerHTML = WURFL.complete_device_name;
         document.querySelector('.browser').innerHTML = `${WURFL.advertised_browser} ${WURFL.advertised_browser_version}`;
         document.querySelector('.os').innerHTML = osVersion;
