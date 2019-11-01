@@ -3,33 +3,54 @@
     <title>Apple Small MP4 Bug</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .mp4 {
+        * {
+            font-size: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        code {
+            font-family: monospace;
+            background-color: rgb(204, 243, 253);
+        }
+
+        .example-img {
             display: inline-block;
-            background-color: #aaa;
-            border: 1px solid black;
+            border: 1px solid #333;
+        }
+
+        .bad > p {
+            margin: 0px;
             padding: 5px;
-            margin: 10 0 10 0px;
         }
     </style>
 </head>
 <body>
-    <p>Some Apple iOS devices crash when viewing small MP4 files, either in an <code>img</code> or <code>video</code> tag, or when visiting them directly.</p>
-    <p>If you are using an newer iPhone (XS, XR, XS Max, etc) or iPad (2018, 2019+), pressing the <strong>Render Bad MP4</strong> button will crash your browser</p>
-    <p>See <a href="https://github.com/kamermans/ios-small-mp4-bug" target="_blank">the github repo</a> for the full source, including the Adobe Photoshop PSD source file</p>
-    <br>
-    <button class="btn-good">Render Good MP4</button> | <button class="btn-good-gif">Render as GIF</button><br>
-    <div class="mp4 good"><p>Good mp4/gif will be rendered here</p></div>
+    <p>Some Apple iOS devices crash when viewing small MP4 files (below about 250px wide), either in an <code>img</code> or <code>video</code> tag, or when visiting them directly.</p>
+    <p>If you are using an newer iPhone (XS, XR, XS Max, etc) or iPad (2018, 2019+), pressing the <strong>Render Bad MP4</strong> button will crash your browser.</p>
+    <p>See <a href="https://github.com/kamermans/ios-small-mp4-bug" target="_blank">the github repo</a> for the full source, including the Adobe Photoshop PSD source file.</p>
+    <hr>
+    <p>This animated GIF is <code>256x64</code>:<br>
+        <div class="example-img"><img src="assets/256x64.gif"></div>
+    </p>
 
-    <br><br>
-    <button class="btn-bad">Render Bad MP4</button> | <button class="btn-bad-gif">Render as GIF</button><br>
-    <div class="mp4 bad"><p>Bad mp4/gif will be rendered here</p></div>
+    <p>This is the same animation as an MP4 in an <code>&lt;img&gt;</code> tag:<br>
+        <div class="example-img"><img src="assets/256x64.mp4"></div><br>
+        <em>Note: this will only work on Apple Devices</em>
+    </p>
+    <hr>
+
+    <p>This animated GIF is cropped slightly smaller, at <code>232x40</code>:<br>
+        <div class="example-img"><img src="assets/232x40.gif"></div>
+    </p>
+
+    <p>This is the same animation as an MP4 in an <code>&lt;img&gt;</code> tag:<br>
+        <div class="example-img bad"><p>Click to load the MP4<br>This will freeze newer iPhones &amp; iPods</p></div>
+    </p>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector('.btn-good').addEventListener('click', e => document.querySelector('.good').innerHTML = '<img src="assets/256x64.mp4">');
-        document.querySelector('.btn-good-gif').addEventListener('click', e => document.querySelector('.good').innerHTML = '<img src="assets/256x64.gif">');
-        document.querySelector('.btn-bad').addEventListener('click', e => document.querySelector('.bad').innerHTML = '<img src="assets/232x40.mp4">');
-        document.querySelector('.btn-bad-gif').addEventListener('click', e => document.querySelector('.bad').innerHTML = '<img src="assets/232x40.gif">');
+        const badImgDiv = document.querySelector('.example-img.bad')
+        badImgDiv.addEventListener('click', () => badImgDiv.innerHTML = '<img src="assets/232x40.mp4">');
     });
     </script>
 </body>
