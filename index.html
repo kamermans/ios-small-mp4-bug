@@ -62,7 +62,7 @@
     </p>
 
     <p>This is the same animation as an MP4 in a <code>&lt;video&gt;</code> tag:<br>
-        <div class="example-img bad video-tag clickable"><p>Click to load the MP4 in a <code>&lt;video&gt;</code><br>This will freeze newer iPhones &amp; iPods</p></div><br>
+        <div class="example-img bad video-tag clickable"><p>Click to load the MP4 in a <code>&lt;video&gt;</code> tag.<br>This will freeze newer iPhones &amp; iPods</p></div><br>
         You can also <a href="assets/232x40.mp4" target="_blank">load this MP4 in another tab</a> to see it crash there.
     </p>
 
@@ -71,13 +71,9 @@
         const badImgDiv = document.querySelector('.example-img.bad.img-tag')
         const badVidDiv = document.querySelector('.example-img.bad.video-tag')
         badImgDiv.addEventListener('click', e => {
-            e.preventDefault();
-            document.querySelector('.example-img.bad.img-tag.clickable').classList.remove('clickable')
             badImgDiv.innerHTML = '<img src="assets/232x40.mp4">';
         });
         badVidDiv.addEventListener('click', e => {
-            e.preventDefault();
-            document.querySelector('.example-img.bad.video-tag.clickable').classList.remove('clickable')
             badVidDiv.innerHTML = '<video autoplay loop><source src="assets/232x40.mp4" type="video/mp4"></video>';
         });
     });
