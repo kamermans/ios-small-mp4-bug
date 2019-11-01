@@ -79,9 +79,14 @@
     });
 
     document.addEventListener('WurflJSDetectionComplete', () => {
+        let osVersion = `${WURFL.advertised_device_os} ${WURFL.advertised_device_os_version}`;
+        if (WURFL.complete_device_name.match('iPad') && WURFL.advertised_device_os != 'iOS') {
+            osVersion += " (you're in desktop mode, real OS version is unknown)";
+        }
+        
         document.querySelector('.device').innerHTML = WURFL.complete_device_name;
         document.querySelector('.browser').innerHTML = `${WURFL.advertised_browser} ${WURFL.advertised_browser_version}`;
-        document.querySelector('.os').innerHTML = `${WURFL.advertised_device_os} ${WURFL.advertised_device_os_version}`;
+        document.querySelector('.os').innerHTML = osVersion;
         document.querySelector('.devinfo').classList.remove('hidden');
     });
     </script>
